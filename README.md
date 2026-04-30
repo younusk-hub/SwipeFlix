@@ -104,22 +104,6 @@ lobbies: {
     * Calculate highest overlap score
     * Return best possible option
 
-⸻
-
-📦 Installation (Local Setup)
-
-# Clone repo
-git clone https://github.com/your-username/matchflix.git
-# Install dependencies
-cd matchflix
-npm install
-# Run frontend
-npm run dev
-# Run backend (if applicable)
-cd server
-npm start
-
-⸻
 
 🌍 Future Improvements
 
