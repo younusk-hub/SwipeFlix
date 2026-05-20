@@ -1,5 +1,6 @@
 import React from 'react'
 import CreateLobby from '../CreateLobby/CreateLobby';
+import JoinLobby from '../JoinLobby/JoinLobby';
 
 const Home = () => {
   return (
@@ -22,8 +23,9 @@ const Home = () => {
         <section className="createlobby"> 
             <CreateLobby />
         </section>
-
-
+        <section className="joinlobby">
+            <JoinLobby />
+        </section>
     </div>
   )
 }

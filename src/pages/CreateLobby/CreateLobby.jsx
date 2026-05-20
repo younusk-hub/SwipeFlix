@@ -7,6 +7,7 @@ const CreateLobby = () => {
     const navigate = useNavigate();
     const [lobbyCode, setLobbyCode] = useState('');
     const [hostId, setHostId] = useState('');
+    // need to at loading screen and error handling for lobby creation
 
     const handleCreateLobby = async () => {
         // Logic to create a lobby and generate a lobby code
@@ -21,6 +22,9 @@ const CreateLobby = () => {
 
     useEffect(() => {
         console.log(lobbyCode);
+        if (lobbyCode) {
+            navigate(`/lobby/${lobbyCode}`);
+        }
     }, [lobbyCode]);
 
 
@@ -34,12 +38,12 @@ const CreateLobby = () => {
                 value={hostId}
                 onChange={(e) => setHostId(e.target.value)}
             />
-            {lobbyCode && (
+            {/* {lobbyCode && (
                 <div>
                     <p>Lobby Code: {lobbyCode}</p>
                     <button onClick={() => navigate(`/lobby/${lobbyCode}`)}>Go to Lobby</button>
                 </div>
-            )}
+            )} */}
         </div>
     )
 }
