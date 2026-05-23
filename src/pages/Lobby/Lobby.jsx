@@ -11,6 +11,7 @@ const Lobby = () => {
     
 
     useEffect(() => {
+        console.log("LISTENER CREATED");
         const unsub = onSnapshot(
             doc(db, "lobbies", lobbyId),
             (docSnap) => {
@@ -27,11 +28,14 @@ const Lobby = () => {
                         navigate(`/lobby/${lobbyId}/match`);
                     }
                 }
+                console.log("SNAPSHOT FIRED");
             }
         );
-        return () => unsub();
+        return () => {
+            unsub()
+            console.log("LISTENER REMOVED");};
     }, [lobbyId]);
-    
+
     return (
         <div>Lobby: {lobbyId}
             <ul>
