@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/lobby/:lobbyId" element={<Lobby />} />
+        <Route path="/lobby/:lobbyId/match" element={<div>Match Screen</div>} />
       </Routes>
     </BrowserRouter>
   )

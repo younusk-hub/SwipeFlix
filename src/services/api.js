@@ -29,3 +29,13 @@ export const joinLobby = async (lobbyId, userId) => {
     });
     return res.json();
 };
+
+export const getMovies = async (lobbyId) => {
+    const res = await fetch(`http://localhost:3001/get-movies?lobbyId=${lobbyId}`, {
+        method: "GET",
+        headers: {
+        "Content-Type": "application/json",
+        },
+    });
+    return res.json();
+};
