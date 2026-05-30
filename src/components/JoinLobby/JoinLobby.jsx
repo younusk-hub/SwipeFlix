@@ -7,18 +7,20 @@ import './JoinLobby.scss';
 const JoinLobby = () => {
     const navigate = useNavigate();
     const [lobbyCode, setLobbyCode] = useState('');
-    const [userId, setUserId] = useState('');
+    const [playerName, setPlayerName] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
     // need to at loading screen and error handling for lobby joining
 
     const handleJoinLobby = async () => {
-        if (!lobbyCode || !userId) {
+        if (!lobbyCode || !playerName) {
             setAlertMessage("Please enter both the lobby code and your name to join a lobby.");
             return;
         }
-        const res = await joinLobby(lobbyCode, userId);
+        const res = await joinLobby(lobbyCode, playerName);
         console.log(res);
         if (res.success) {
+            localStorage.setItem("playerName", playerName);
+            console.log(localStorage.getItem("playerName"));
             navigate(`/lobby/${lobbyCode}`);
         } else {
             setAlertMessage(res.message || "Failed to join lobby. Please check the lobby code and try again.");
@@ -38,8 +40,8 @@ const JoinLobby = () => {
             <input
                 type="text"
                 placeholder="Enter your Name to Join"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
+                value={playerName}
+                onChange={(e) => setPlayerName(e.target.value)}
             />
             <button className="join-lobby-button" onClick={handleJoinLobby}>Join Lobby</button>
         </div>
