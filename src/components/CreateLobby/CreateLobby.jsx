@@ -20,6 +20,10 @@ const CreateLobby = () => {
             return;
         }
         const res = await createLobby(hostId);
+        if (!res.success) {
+            setAlertMessage("Failed to create lobby. Please try again.");
+            return;
+        }
         console.log(res);
         setLobbyCode(res.lobbyId);
     }

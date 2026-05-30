@@ -21,7 +21,7 @@ const JoinLobby = () => {
         if (res.success) {
             navigate(`/lobby/${lobbyCode}`);
         } else {
-            setAlertMessage("Failed to join lobby. Please check the lobby code and try again.");
+            setAlertMessage(res.message || "Failed to join lobby. Please check the lobby code and try again.");
         }
     }
 
