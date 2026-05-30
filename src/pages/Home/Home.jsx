@@ -1,12 +1,13 @@
 import React from 'react'
 import CreateLobby from '../CreateLobby/CreateLobby';
 import JoinLobby from '../JoinLobby/JoinLobby';
+import './Home.scss';
 
 const Home = () => {
   return (
-    <div>
-        <section className="home-description">
-            <h1>Welcome to SwipeFlix 🎬</h1>
+    <div className="home">
+        <section className="welcome">
+            <h1>SwipeFlix 🎬</h1>
             <p>
                 SwipeFlix helps you and your friends, family, or partner decide what to watch
                 without endless scrolling.
@@ -20,11 +21,13 @@ const Home = () => {
             </p>
         </section>
 
-        <section className="createlobby"> 
-            <CreateLobby />
-        </section>
-        <section className="joinlobby">
-            <JoinLobby />
+        <section className="actions">
+            <div>
+                <CreateLobby />
+            </div>
+            <div>
+                <JoinLobby />
+            </div>
         </section>
     </div>
   )

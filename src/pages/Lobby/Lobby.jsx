@@ -19,13 +19,12 @@ const Lobby = () => {
                     const data = docSnap.data();
 
                     console.log(data);
-                    console.log(data.movies);
 
                     setLobbyData(data);
 
                     // match detected
                     if (data.status === "matched") {
-                        navigate(`/lobby/${lobbyId}/match`);
+                        navigate(`/lobby/${lobbyId}/match/${data.match}`);
                     }
                 }
                 console.log("SNAPSHOT FIRED");
@@ -33,7 +32,8 @@ const Lobby = () => {
         );
         return () => {
             unsub()
-            console.log("LISTENER REMOVED");};
+            console.log("LISTENER REMOVED");
+        };
     }, [lobbyId]);
 
     return (

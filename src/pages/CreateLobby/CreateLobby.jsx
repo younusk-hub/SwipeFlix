@@ -27,7 +27,6 @@ const CreateLobby = () => {
         }
     }, [lobbyCode]);
 
-
     return (
         <div>
             <h1>Create Lobby</h1>
@@ -38,12 +37,6 @@ const CreateLobby = () => {
                 value={hostId}
                 onChange={(e) => setHostId(e.target.value)}
             />
-            {/* {lobbyCode && (
-                <div>
-                    <p>Lobby Code: {lobbyCode}</p>
-                    <button onClick={() => navigate(`/lobby/${lobbyCode}`)}>Go to Lobby</button>
-                </div>
-            )} */}
         </div>
     )
 }
