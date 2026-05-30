@@ -27,7 +27,7 @@ const JoinLobby = () => {
 
     return (
         <div className="join-lobby">
-            <h2>Join Lobby</h2>
+            <h2>Join a Lobby</h2>
             <Alert message={alertMessage} />
             <input
                 type="text"

@@ -7,12 +7,12 @@ import './Home.scss';
 
 const Home = () => {
 
-    
+
   return (
     <div className="home">
         <section className="welcome">
             <h1>
-                Swipe<span className="highlight">Flix</span> 🎬
+                <span className="highlight">Swipe</span>Flix 🎬
             </h1>
 
             <p className="tagline">

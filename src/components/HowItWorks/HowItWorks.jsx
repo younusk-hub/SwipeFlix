@@ -10,7 +10,7 @@ const HowItWorks = () => {
                 <div className="number">1</div>
                 <div className="content">
                     <h3>Create a lobby</h3>
-                    <p>Give your lobby a name</p>
+                    <p>Enter your name to create a lobby</p>
                 </div>
             </div>
 

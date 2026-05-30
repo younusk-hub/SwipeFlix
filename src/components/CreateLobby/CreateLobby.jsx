@@ -33,7 +33,7 @@ const CreateLobby = () => {
 
     return (
         <div className="create-lobby">
-            <h2>Create Lobby</h2>
+            <h2>Create a Lobby</h2>
             <Alert message={alertMessage} />
             <input
                 type="text"
