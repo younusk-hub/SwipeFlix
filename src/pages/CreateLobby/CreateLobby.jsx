@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { createLobby } from '../../services/api';
+import './CreateLobby.scss';
 
 
 const CreateLobby = () => {
@@ -28,15 +29,15 @@ const CreateLobby = () => {
     }, [lobbyCode]);
 
     return (
-        <div>
-            <h1>Create Lobby</h1>
-            <button onClick={handleCreateLobby}>Create Lobby</button>
+        <div className="create-lobby">
+            <h2>Create Lobby</h2>
             <input
                 type="text"
                 placeholder="Enter your name"
                 value={hostId}
                 onChange={(e) => setHostId(e.target.value)}
             />
+            <button className="create-lobby-button" onClick={handleCreateLobby}>Create Lobby</button>
         </div>
     )
 }

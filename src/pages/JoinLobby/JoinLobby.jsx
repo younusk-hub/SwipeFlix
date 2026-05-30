@@ -1,6 +1,7 @@
 import { React, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { joinLobby } from '../../services/api';
+import './JoinLobby.scss';
 
 const JoinLobby = () => {
     const navigate = useNavigate();
@@ -23,9 +24,8 @@ const JoinLobby = () => {
     }
 
     return (
-        <div>
-            <h1>Join Lobby</h1>
-            <button onClick={handleJoinLobby}>Join Lobby</button>
+        <div className="join-lobby">
+            <h2>Join Lobby</h2>
             <input
                 type="text"
                 placeholder="Enter your Lobby Code"
@@ -38,6 +38,7 @@ const JoinLobby = () => {
                 value={userId}
                 onChange={(e) => setUserId(e.target.value)}
             />
+            <button className="join-lobby-button" onClick={handleJoinLobby}>Join Lobby</button>
         </div>
     )
 }

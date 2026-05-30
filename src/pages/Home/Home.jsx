@@ -7,17 +7,16 @@ const Home = () => {
   return (
     <div className="home">
         <section className="welcome">
-            <h1>SwipeFlix 🎬</h1>
-            <p>
-                SwipeFlix helps you and your friends, family, or partner decide what to watch
-                without endless scrolling.
+            <h1>
+                Swipe<span className="highlight">Flix</span> 🎬
+            </h1>
+
+            <p className="tagline">
+                Find what everyone wants to watch.
             </p>
             <p>
-                Create a lobby, share the code, and start swiping through movies and shows
-                together. Swipe right if you would watch it, or swipe left if you would skip it.
-            </p>
-            <p>
-                When everyone likes the same movie, you get a match! 🍿
+                Create a lobby, invite your friends, swipe on movies and get a match!🍿
+                
             </p>
         </section>
 
@@ -25,9 +24,48 @@ const Home = () => {
             <div>
                 <CreateLobby />
             </div>
+            <span className="divider">OR</span>
             <div>
                 <JoinLobby />
             </div>
+        </section>
+        
+        <section className="how-it-works">
+
+            <h2>How it works</h2>
+
+            <div className="step">
+                <div className="number">1</div>
+                <div className="content">
+                    <h3>Create a lobby</h3>
+                    <p>Give your lobby a name</p>
+                </div>
+            </div>
+
+            <div className="step">
+                <div className="number">2</div>
+                <div className="content">
+                    <h3>Share the code</h3>
+                    <p>Invite your friends</p>
+                </div>
+            </div>
+
+            <div className="step">
+                <div className="number">3</div>
+                <div className="content">
+                    <h3>Swipe movies together</h3>
+                    <p>Like or skip movies</p>
+                </div>
+            </div>
+
+            <div className="step">
+                <div className="number">4</div>
+                <div className="content">
+                    <h3>Get a match!</h3>
+                    <p>If everyone likes the same movie, it's a match 🍿</p>
+                </div>
+            </div>
+
         </section>
     </div>
   )
