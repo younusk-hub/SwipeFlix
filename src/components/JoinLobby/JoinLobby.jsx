@@ -1,17 +1,19 @@
 import { React, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { joinLobby } from '../../services/api';
+import Alert from '../Alert/Alert';
 import './JoinLobby.scss';
 
 const JoinLobby = () => {
     const navigate = useNavigate();
     const [lobbyCode, setLobbyCode] = useState('');
     const [userId, setUserId] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
     // need to at loading screen and error handling for lobby joining
 
     const handleJoinLobby = async () => {
         if (!lobbyCode || !userId) {
-            alert("Please enter both the lobby code and your name to join a lobby.");
+            setAlertMessage("Please enter both the lobby code and your name to join a lobby.");
             return;
         }
         const res = await joinLobby(lobbyCode, userId);
@@ -19,13 +21,14 @@ const JoinLobby = () => {
         if (res.success) {
             navigate(`/lobby/${lobbyCode}`);
         } else {
-            alert("Failed to join lobby. Please check the lobby code and try again.");
+            setAlertMessage("Failed to join lobby. Please check the lobby code and try again.");
         }
     }
 
     return (
         <div className="join-lobby">
             <h2>Join Lobby</h2>
+            <Alert message={alertMessage} />
             <input
                 type="text"
                 placeholder="Enter your Lobby Code"

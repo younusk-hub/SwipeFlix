@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { createLobby } from '../../services/api';
+import Alert from '../Alert/Alert';
 import './CreateLobby.scss';
 
 
@@ -8,12 +9,14 @@ const CreateLobby = () => {
     const navigate = useNavigate();
     const [lobbyCode, setLobbyCode] = useState('');
     const [hostId, setHostId] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
+
     // need to at loading screen and error handling for lobby creation
 
     const handleCreateLobby = async () => {
         // Logic to create a lobby and generate a lobby code
         if (!hostId) {
-            alert("Please enter your name to create a lobby.");
+            setAlertMessage("Please enter your name to create a lobby.");
             return;
         }
         const res = await createLobby(hostId);
@@ -31,6 +34,7 @@ const CreateLobby = () => {
     return (
         <div className="create-lobby">
             <h2>Create Lobby</h2>
+            <Alert message={alertMessage} />
             <input
                 type="text"
                 placeholder="Enter your name"
