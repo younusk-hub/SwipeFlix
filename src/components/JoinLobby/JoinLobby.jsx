@@ -16,12 +16,12 @@ const JoinLobby = () => {
             setAlertMessage("Please enter both the lobby code and your name to join a lobby.");
             return;
         }
-        const res = await joinLobby(lobbyCode, playerName);
+        const res = await joinLobby(lobbyCode.toLowerCase(), playerName);
         console.log(res);
         if (res.success) {
             localStorage.setItem("playerName", playerName);
             console.log(localStorage.getItem("playerName"));
-            navigate(`/lobby/${lobbyCode}`);
+            navigate(`/lobby/${lobbyCode.toLowerCase()}`);
         } else {
             setAlertMessage(res.message || "Failed to join lobby. Please check the lobby code and try again.");
         }
