@@ -11,6 +11,28 @@
         margin-bottom: 2rem;
     }
 
+    .genres {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+
+        .genre {
+            padding: 0.5rem 1rem;
+            border: 1px solid #27272a;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            background-color: #1f1f23;
+            color: white;
+
+            &.selected {
+                background-color: #8b5cf6;
+                border-color: #8b5cf6;
+            }
+        }
+    }
+
     input {
         width: 100%;
         padding: 0.75rem;

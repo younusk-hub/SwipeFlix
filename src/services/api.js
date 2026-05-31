@@ -1,10 +1,10 @@
-export const createLobby = async ( hostId ) => {
+export const createLobby = async ( hostId, genres ) => {
     const res = await fetch("http://localhost:3001/create-lobby", {
         method: "POST",
         headers: {
         "Content-Type": "application/json",
         },
-        body: JSON.stringify({ hostId }),
+        body: JSON.stringify({ hostId, genres }),
     });
     return res.json();
 };
