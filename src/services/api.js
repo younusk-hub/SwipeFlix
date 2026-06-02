@@ -1,5 +1,7 @@
+// http://localhost:3001/
+
 export const createLobby = async ( hostId, genres ) => {
-    const res = await fetch("http://localhost:3001/create-lobby", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/create-lobby`, {
         method: "POST",
         headers: {
         "Content-Type": "application/json",
@@ -10,7 +12,7 @@ export const createLobby = async ( hostId, genres ) => {
 };
 
 export const submitVote = async (data) => {
-    await fetch("http://localhost:3001/vote", {
+    await fetch(`${import.meta.env.VITE_API_URL}/vote`, {
         method: "POST",
         headers: {
         "Content-Type": "application/json",
@@ -20,7 +22,7 @@ export const submitVote = async (data) => {
 };
 
 export const joinLobby = async (lobbyId, userId) => {
-    const res = await fetch("http://localhost:3001/join-lobby", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/join-lobby`, {
         method: "POST",
         headers: {
         "Content-Type": "application/json",
@@ -31,7 +33,7 @@ export const joinLobby = async (lobbyId, userId) => {
 };
 
 export const getMovies = async (lobbyId) => {
-    const res = await fetch(`http://localhost:3001/get-movies?lobbyId=${lobbyId}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/get-movies?lobbyId=${lobbyId}`, {
         method: "GET",
         headers: {
         "Content-Type": "application/json",
@@ -41,7 +43,7 @@ export const getMovies = async (lobbyId) => {
 };
 
 export const completedList = async (lobbyId, userId) => {
-    const res = await fetch(`http://localhost:3001/completed-list?lobbyId=${lobbyId}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/completed-list?lobbyId=${lobbyId}`, {
         method: "POST",
         headers: {
         "Content-Type": "application/json",
