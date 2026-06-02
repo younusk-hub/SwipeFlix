@@ -3,14 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { onSnapshot, doc } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { getMovies, submitVote } from '../../services/api';
-import { motion, AnimatePresence } from "motion/react";
+import LobbyCode from '../../components/LobbyCode/LobbyCode';
+import MovieCard from '../../components/MovieCard/MovieCard';
 import './Lobby.scss';
 
 const Lobby = () => {
     const navigate = useNavigate();
     const lobbyId = useParams().lobbyId;
     const [lobbyData, setLobbyData] = useState({});
-    const [copyCode, setCopyCode] = useState(false);
 
     const [movies, setMovies] = useState([]); // movies array from db 
     const [movieOrder, setMovieOrder] = useState([]); // array of movie ids in order to be swiped on
@@ -74,89 +74,24 @@ const Lobby = () => {
     };
 
     if (!activeMovie && lobbyData.status !== "matched") {
-        return <div>Waiting for other players...</div>;
+        return (
+            <div className="lobby">
+                <div className="lobby__content">
+                    <LobbyCode lobbyId={lobbyId} numberOfPlayers={numberOfPlayers} />
+                    <h2 className="no-more-movies">No more movies to swipe on!</h2>
+                    <p className="waiting-for-players">Waiting for other players to finish...</p>
+                </div>
+            </div>
+        );
     }
 
     return (
         <div className="lobby">
             <div className="lobby__content">
 
-                <div className="lobby-code">
-                    <p className="lobby-code__label">
-                        <span>Lobby Code</span>
-                        <span>Players: {numberOfPlayers}</span>
-                    </p>
+                <LobbyCode lobbyId={lobbyId} numberOfPlayers={numberOfPlayers} />
 
-                    <div className="lobby-code__header">
-                        <h2 className="lobby-code__value">
-                            {lobbyId.toUpperCase()}
-                        </h2>
-
-                        <button className="lobby-code__copy-btn"
-                            onClick={() => {
-                                navigator.clipboard.writeText(lobbyId.toUpperCase());
-                                setCopyCode(true);
-                                setTimeout(() => setCopyCode(false), 2000);
-                            }}
-                        >
-                            {copyCode ? "Copied!" : "Copy Code"}
-                        </button>
-                    </div>
-
-                    <p>
-                        Share this code with your friends!
-                    </p>
-                </div>
-
-                <div className="movie-card">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeMovie.id}
-                            className="movie-card"
-                            drag="x"
-                            onDragEnd={(event, info) => {
-                                if (info.offset.x > 150) {
-                                    handleVote(true);
-                                }
-                                if (info.offset.x < -150) {
-                                    handleVote(false);
-                                }
-                            }}
-                        >
-                            <div className="movie-poster">
-                                <img
-                                    src={activeMovie.posterUrl}
-                                    alt={activeMovie.title}
-                                />
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-
-                    <div className="movie-info">
-                        <h1 className="movie-title">
-                            {activeMovie.title}
-                        </h1>
-
-                        <p className="movie-meta">
-                            {activeMovie.releaseYear} • {activeMovie.rating?.toFixed(1)} / 10
-                        </p>
-
-                        <p className="movie-description">
-                            {activeMovie.overview}
-                        </p>
-
-                        <div className="genre-list">
-                            {activeMovie.genres?.map((genre) => (
-                                <span
-                                    key={genre}
-                                    className="genre"
-                                >
-                                    {genre}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                <MovieCard activeMovie={activeMovie} handleVote={handleVote} pulse={false} />
             </div>
 
             <div className="vote-bar">
