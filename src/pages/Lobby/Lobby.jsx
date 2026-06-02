@@ -46,7 +46,7 @@ const Lobby = () => {
                     if (data.status === "matched" && data.match) {
                         navigate(`/lobby/${lobbyId}/match/${data.match}`);
                     }
-                    if (data.status === "No Match") {
+                    if (data.status === "No match") {
                         setNoMatch(true);
                     }
                 }
