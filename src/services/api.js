@@ -39,3 +39,14 @@ export const getMovies = async (lobbyId) => {
     });
     return res.json();
 };
+
+export const completedList = async (lobbyId, userId) => {
+    const res = await fetch(`http://localhost:3001/completed-list?lobbyId=${lobbyId}`, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ lobbyId, userId }),
+    });
+    return res.json();
+};

@@ -2,9 +2,10 @@ import { React , useState, useEffect} from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { onSnapshot, doc } from 'firebase/firestore';
 import { db } from '../../services/firebase';
-import { getMovies, submitVote } from '../../services/api';
+import { getMovies, submitVote, completedList } from '../../services/api';
 import LobbyCode from '../../components/LobbyCode/LobbyCode';
 import MovieCard from '../../components/MovieCard/MovieCard';
+
 import './Lobby.scss';
 
 const Lobby = () => {
@@ -18,6 +19,7 @@ const Lobby = () => {
     
     const playerName = localStorage.getItem("playerName");
     const [numberOfPlayers, setNumberOfPlayers] = useState(0);
+    const [noMatch, setNoMatch] = useState(false);
     
     const fetchMovies = async (lobbyId) => {
         const res = await getMovies(lobbyId);
@@ -38,11 +40,14 @@ const Lobby = () => {
                     const data = docSnap.data();
                     console.log(data);
                     setLobbyData(data);
-                    setNumberOfPlayers(data.users.length);
+                    setNumberOfPlayers(Object.keys(data.users).length);
 
                     // match detected
                     if (data.status === "matched") {
                         navigate(`/lobby/${lobbyId}/match/${data.match}`);
+                    }
+                    if (data.status === "No Match") {
+                        setNoMatch(true);
                     }
                 }
                 console.log("SNAPSHOT FIRED");
@@ -71,15 +76,35 @@ const Lobby = () => {
             userId: playerName,
             vote: vote
         }); 
+
+        console.log(activeMovieIndex);
+
+        if (activeMovieIndex + 1 >= movieOrder.length) {
+            await handleCompletedList();
+        }
     };
+
+    const handleCompletedList = async () => {
+        const res = await completedList(lobbyId, playerName);
+        console.log(res);
+    }
 
     if (!activeMovie && lobbyData.status !== "matched") {
         return (
             <div className="lobby">
                 <div className="lobby__content">
                     <LobbyCode lobbyId={lobbyId} numberOfPlayers={numberOfPlayers} />
-                    <h2 className="no-more-movies">No more movies to swipe on!</h2>
-                    <p className="waiting-for-players">Waiting for other players to finish...</p>
+                    {noMatch ? (
+                        <div className="no-match">
+                            <h2 className="no-more-movies">No match found!</h2>
+                            <button className="try-again-button" onClick={() => navigate(`/`)}>Play Again</button>
+                        </div>
+                    ) : (
+                        <div className="waiting-for-players">
+                            <h2 className="no-more-movies">No more movies to swipe on!</h2>
+                            <p>Waiting for other players to finish...</p>
+                        </div>
+                    )}
                 </div>
             </div>
         );
