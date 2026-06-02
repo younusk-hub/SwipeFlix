@@ -40,10 +40,10 @@ const Lobby = () => {
                     const data = docSnap.data();
                     console.log(data);
                     setLobbyData(data);
-                    setNumberOfPlayers(Object.keys(data.users).length);
+                    setNumberOfPlayers(Object.keys(data.users || {}).length);
 
                     // match detected
-                    if (data.status === "matched") {
+                    if (data.status === "matched" && data.match) {
                         navigate(`/lobby/${lobbyId}/match/${data.match}`);
                     }
                     if (data.status === "No Match") {
@@ -51,6 +51,9 @@ const Lobby = () => {
                     }
                 }
                 console.log("SNAPSHOT FIRED");
+            },
+            (error) => {
+                console.error("Lobby listener error:", error);
             }
         );
         return () => {
