@@ -40,7 +40,7 @@ const Lobby = () => {
                     const data = docSnap.data();
                     console.log(data);
                     setLobbyData(data);
-                    setNumberOfPlayers(Object.keys(data.users || {}).length);
+                    setNumberOfPlayers(Object.keys(data.users).length);
 
                     // match detected
                     if (data.status === "matched" && data.match) {
