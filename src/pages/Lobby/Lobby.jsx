@@ -57,13 +57,15 @@ const Lobby = () => {
                 console.error("Lobby listener error:", error);
             }
         );
-        setLoading(false);
         return () => {
             unsub()
             console.log("LISTENER REMOVED");
         };
     }, [lobbyId]);
 
+    if (movies.length > 0 && loading) {
+        setLoading(false);
+    }
 
     const activeMovieId = movieOrder[activeMovieIndex];
     console.log(activeMovieId);
