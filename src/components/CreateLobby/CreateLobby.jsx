@@ -19,12 +19,13 @@ const CreateLobby = () => {
     const [playerName, setPlayerName] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
     const [selectedGenres, setSelectedGenres] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     // need to at loading screen and error handling for lobby creation
 
     const handleCreateLobby = async () => {
         // Logic to create a lobby and generate a lobby code
-        
+
         if (!playerName) {
             setAlertMessage("Please enter your name to create a lobby.");
             return;
@@ -33,7 +34,9 @@ const CreateLobby = () => {
             setAlertMessage("Please select at least one genre to create a lobby.");
             return;
         }
+        setLoading(true);
         const res = await createLobby(playerName, selectedGenres);
+        setLoading(false);
         if (!res.success) {
             setAlertMessage("Failed to create lobby. Please try again.");
             return;
@@ -57,6 +60,10 @@ const CreateLobby = () => {
         } else {
             setSelectedGenres([...selectedGenres, genreId]);
         }
+    }
+
+    if (loading) {
+        return <div className="loading">Creating lobby...</div>;
     }
 
     return (

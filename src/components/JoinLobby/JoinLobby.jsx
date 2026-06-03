@@ -9,6 +9,7 @@ const JoinLobby = () => {
     const [lobbyCode, setLobbyCode] = useState('');
     const [playerName, setPlayerName] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     // need to at loading screen and error handling for lobby joining
 
     const handleJoinLobby = async () => {
@@ -16,7 +17,9 @@ const JoinLobby = () => {
             setAlertMessage("Please enter both the lobby code and your name to join a lobby.");
             return;
         }
+        setLoading(true);
         const res = await joinLobby(lobbyCode.toLowerCase(), playerName);
+        setLoading(false);
         console.log(res);
         if (res.success) {
             localStorage.setItem("playerName", playerName);
@@ -25,6 +28,10 @@ const JoinLobby = () => {
         } else {
             setAlertMessage(res.message || "Failed to join lobby. Please check the lobby code and try again.");
         }
+    }
+
+    if (loading) {
+        return <div className="loading">Joining lobby...</div>;
     }
 
     return (

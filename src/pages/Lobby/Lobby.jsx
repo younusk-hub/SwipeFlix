@@ -20,6 +20,7 @@ const Lobby = () => {
     const playerName = localStorage.getItem("playerName");
     const [numberOfPlayers, setNumberOfPlayers] = useState(0);
     const [noMatch, setNoMatch] = useState(false);
+    const [loading, setLoading] = useState(true);
     
     const fetchMovies = async (lobbyId) => {
         const res = await getMovies(lobbyId);
@@ -31,6 +32,7 @@ const Lobby = () => {
 
     useEffect(() => {
         fetchMovies(lobbyId);
+        setLoading(false);
 
         console.log("LISTENER CREATED");
         const unsub = onSnapshot(
@@ -108,6 +110,17 @@ const Lobby = () => {
                             <p>Waiting for other players to finish...</p>
                         </div>
                     )}
+                </div>
+            </div>
+        );
+    }
+
+    if (loading) {
+        return (
+            <div className="lobby">
+                <div className="lobby__content">
+                    <LobbyCode lobbyId={lobbyId} numberOfPlayers={numberOfPlayers} />
+                    <div className="loading">Loading movies...</div>
                 </div>
             </div>
         );
