@@ -120,7 +120,7 @@ const Lobby = () => {
             <div className="lobby">
                 <div className="lobby__content">
                     <LobbyCode lobbyId={lobbyId} numberOfPlayers={numberOfPlayers} />
-                    <div className="loading">Loading movies...</div>
+                    <div className="loading">Loading movies... please wait a moment.</div>
                 </div>
             </div>
         );

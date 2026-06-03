@@ -63,7 +63,7 @@ const CreateLobby = () => {
     }
 
     if (loading) {
-        return <div className="loading">Creating lobby...</div>;
+        return <div className="loading">Creating lobby... please wait a moment.</div>;
     }
 
     return (

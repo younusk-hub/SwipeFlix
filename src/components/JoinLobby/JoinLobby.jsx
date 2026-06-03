@@ -31,7 +31,7 @@ const JoinLobby = () => {
     }
 
     if (loading) {
-        return <div className="loading">Joining lobby...</div>;
+        return <div className="loading">Joining lobby... please wait a moment.</div>;
     }
 
     return (
