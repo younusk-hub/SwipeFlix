@@ -94,7 +94,7 @@ const Lobby = () => {
         console.log(res);
     }
 
-    if (!activeMovie && lobbyData.status !== "matched" && loading === false) {
+    if (!activeMovie && lobbyData.status !== "matched" && movies.length > 0) {
         return (
             <div className="lobby">
                 <div className="lobby__content">
