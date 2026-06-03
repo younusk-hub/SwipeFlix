@@ -32,7 +32,6 @@ const Lobby = () => {
 
     useEffect(() => {
         fetchMovies(lobbyId);
-        setLoading(false);
 
         console.log("LISTENER CREATED");
         const unsub = onSnapshot(
@@ -58,6 +57,7 @@ const Lobby = () => {
                 console.error("Lobby listener error:", error);
             }
         );
+        setLoading(false);
         return () => {
             unsub()
             console.log("LISTENER REMOVED");
@@ -94,7 +94,16 @@ const Lobby = () => {
         console.log(res);
     }
 
-    if (!activeMovie && lobbyData.status !== "matched" && movies.length > 0) {
+    if (loading) {
+        return (
+            <div className="lobby">
+                <div className="lobby__content">
+                    <LobbyCode lobbyId={lobbyId} numberOfPlayers={numberOfPlayers} />
+                    <div className="loading">Loading movies... please wait a moment.</div>
+                </div>
+            </div>
+        );
+    } else if (!activeMovie && lobbyData.status !== "matched") {
         return (
             <div className="lobby">
                 <div className="lobby__content">
@@ -110,17 +119,6 @@ const Lobby = () => {
                             <p>Waiting for other players to finish...</p>
                         </div>
                     )}
-                </div>
-            </div>
-        );
-    }
-
-    if (loading) {
-        return (
-            <div className="lobby">
-                <div className="lobby__content">
-                    <LobbyCode lobbyId={lobbyId} numberOfPlayers={numberOfPlayers} />
-                    <div className="loading">Loading movies... please wait a moment.</div>
                 </div>
             </div>
         );
