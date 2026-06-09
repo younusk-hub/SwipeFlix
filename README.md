@@ -1,6 +1,6 @@
 🎬 SwipeFlix
 
-swipe-flix-rho.vercel.app
+www.swipe-flix-rho.vercel.app
 
 A fun, interactive web app that helps groups decide what to watch together — no more endless scrolling or arguing on movie night.
 
